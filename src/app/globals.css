@@ -56,12 +56,6 @@
   }
 }
 
-@layer components {
-  .page-transition {
-    @apply animate-fade-in;
-  }
-}
-
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -134,10 +128,13 @@
 }
 
 @layer base {
+  .page-transition {
+    @apply animate-fade-in;
+  }
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    /* @apply bg-background text-foreground; */
   }
 }
