@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { SearchSaveForm } from "./search-save-form";
 
 export function SearchInput() {
   const router = useRouter();
@@ -48,6 +49,10 @@ export function SearchInput() {
           <SearchIcon className="h-4 w-4" />
         </Button>
       </form>
+
+      <div className="flex flex-wrap gap-2 items-center">
+        <SearchSaveForm />
+      </div>
     </div>
   );
 }
