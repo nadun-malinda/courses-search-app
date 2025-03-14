@@ -12,4 +12,12 @@ export const CourseSchema = z.object({
   IsFavorite: z.boolean().optional(),
 });
 
+export const FavouriteCourseSchema = z.object({
+  Id: z.string(),
+  UserId: z.string().optional(),
+  CourseId: z.string(),
+  CreatedAt: z.string(),
+});
+
 export type Course = z.infer<typeof CourseSchema>;
+export type FavouriteCourse = z.infer<typeof FavouriteCourseSchema>;
