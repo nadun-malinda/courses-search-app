@@ -6,12 +6,12 @@ import {
   CardFooter,
   CardHeader,
 } from "../ui/card";
-import { Button } from "../ui/button";
 import { formatDistance } from "date-fns";
 import { Badge } from "../ui/badge";
 import { getQueryParams } from "@/utils/url";
 import { DeleteSavedSearch } from "./delete-saved-search";
 import { fetchSavedSearches } from "@/lib/data/search/fetch-saved-searches";
+import { ApplySavedSearch } from "./apply-saved-search";
 
 /**
  * Displays saved searches with relevant details and options to apply or delete them.
@@ -65,14 +65,7 @@ export async function SavedSearches() {
                 <DisplayFilters queryString={search.SearchQuery} />
               </CardContent>
               <CardFooter>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-full transition-all-200"
-                  //   onClick={() => applySavedSearch(search)}
-                >
-                  Apply This Search
-                </Button>
+                <ApplySavedSearch search={search} />
               </CardFooter>
             </Card>
           ))}
