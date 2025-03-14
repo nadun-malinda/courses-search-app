@@ -26,3 +26,24 @@ function getSortedParams(params: URLSearchParams): URLSearchParams {
 
   return sortedParams;
 }
+
+/**
+ * Parses the query string and extracts the `category`, `location`, and `q` parameters.
+ *
+ * @param {string} queryString - The query string to be parsed (e.g., "category=Media,Tech&location=stockholm&q=journ").
+ * @returns {object} An object containing:
+ *   - `category`: An array of categories (split by commas), or `null` if not found.
+ *   - `location`: An array of locations (split by commas), or `null` if not found.
+ *   - `q`: The search query string, or `null` if not found.
+ */
+export function getQueryParams(queryString: string) {
+  // Create a new URLSearchParams instance with the provided query string
+  const params = new URLSearchParams(queryString);
+
+  // Extract values for category, location, and q, and split by commas if present
+  const category = params.get("category")?.split(",") || null;
+  const location = params.get("location")?.split(",") || null;
+  const q = params.get("q") || null;
+
+  return { category, location, q };
+}
