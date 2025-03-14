@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
-import { BookOpen, Calendar, ExternalLink, Heart, MapPin } from "lucide-react";
+import { BookOpen, Calendar, Heart, MapPin } from "lucide-react";
 import Link from "next/link";
 import { Course } from "@/types/courses";
 import { getFormattedDate } from "@/utils/date";
@@ -75,16 +75,6 @@ export function CourseCard({ course }: CourseCardProps) {
 
       <CardFooter className="py-4 bg-secondary/30 border-t border-border/40">
         <div className="w-full flex flex-wrap gap-2 sm:flex-nowrap">
-          <Button
-            variant="outline"
-            className="w-full sm:w-auto bg-white hover:bg-secondary transition-all-200"
-            asChild
-          >
-            <Link href={`/course/${course.CourseId}`}>
-              <ExternalLink className="h-4 w-4 mr-2" />
-              Details
-            </Link>
-          </Button>
           <Button
             variant="default"
             className="w-full sm:w-auto transition-all-200"
