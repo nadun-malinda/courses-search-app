@@ -1,18 +1,16 @@
 "use server";
 
 import { z } from "zod";
-import { createClient } from "@/utils/superbase/server";
 import { revalidateTag } from "next/cache";
+import { deleteSavedSearch } from "@/lib/data/search/delete-saved-search";
 
 const SearchIdSchema = z
   .string()
   .min(1, "Search ID must be a non-empty string.");
 
-export async function deleteSavedSearch(
+export async function deleteSearch(
   searchId: string
 ): Promise<{ success: boolean | null; message: string }> {
-  const supabase = await createClient();
-
   try {
     SearchIdSchema.parse(searchId);
   } catch {
@@ -20,14 +18,7 @@ export async function deleteSavedSearch(
   }
 
   try {
-    const { error } = await supabase
-      .from("saved_searches")
-      .delete()
-      .eq("Id", searchId);
-
-    if (error) {
-      throw new Error(error.message);
-    }
+    await deleteSavedSearch(searchId);
 
     // revalidatePath("/");
     revalidateTag("saved_searches_tag");
