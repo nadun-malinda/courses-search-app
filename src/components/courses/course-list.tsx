@@ -7,7 +7,7 @@ interface CourseListProps {
 
 export async function CourseList({ courses }: CourseListProps) {
   return (
-    <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
+    <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-4">
       {courses.map((course) => (
         <CourseCard key={course.CourseId} course={course} />
       ))}
