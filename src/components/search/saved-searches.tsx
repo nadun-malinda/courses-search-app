@@ -1,4 +1,4 @@
-import { Bookmark, Clock, Search } from "lucide-react";
+import { Clock, Search } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -12,6 +12,7 @@ import { getQueryParams } from "@/utils/url";
 import { DeleteSavedSearch } from "./delete-saved-search";
 import { fetchSavedSearches } from "@/lib/data/search/fetch-saved-searches";
 import { ApplySavedSearch } from "./apply-saved-search";
+import { EmptyResult } from "../empty/empty-result";
 
 /**
  * Displays saved searches with relevant details and options to apply or delete them.
@@ -24,13 +25,11 @@ export async function SavedSearches() {
 
   return (
     <>
-      <h2 className="text-xl font-semibold flex items-center">
-        <Bookmark className="h-5 w-5 mr-2" />
-        Saved Searches
-      </h2>
-
       {savedSearches.length === 0 ? (
-        <EmptyResult />
+        <EmptyResult
+          title="No saved searches yet."
+          message="Save your search parameters for quick access later."
+        />
       ) : (
         <div className="grid grid-cols-4 gap-4">
           {savedSearches?.map((search) => (
@@ -72,19 +71,6 @@ export async function SavedSearches() {
         </div>
       )}
     </>
-  );
-}
-
-function EmptyResult() {
-  return (
-    <Card className="border-dashed bg-muted/30">
-      <CardContent className="pt-6 text-center">
-        <p className="text-muted-foreground">No saved searches yet.</p>
-        <p className="text-sm text-muted-foreground mt-1">
-          Save your search parameters for quick access later.
-        </p>
-      </CardContent>
-    </Card>
   );
 }
 
