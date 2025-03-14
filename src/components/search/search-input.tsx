@@ -1,53 +1,55 @@
 "use client";
 
 import { SearchIcon } from "lucide-react";
-import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { SearchSaveForm } from "./search-save-form";
+import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 
 export function SearchInput() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [search, setSearch] = useState(searchParams.get("q") || "");
+  const [searchText, setSearchText] = useState(searchParams.get("q") || "");
+  const debouncedCallback = useDebouncedCallback(
+    ({ text }: { text: string }) => setSearch({ text }),
+    300
+  );
 
-  const handleSubmit = (formData: FormData) => {
-    const searchText = (formData.get("searchText") as string) ?? "";
+  const setSearch = ({ text }: { text: string }) => {
     const params = new URLSearchParams(searchParams);
 
-    if (searchText) {
+    if (text) {
       params.set("q", searchText);
     } else {
       params.delete("q");
     }
 
-    setSearch(searchText);
-    router.push(`${pathname}/?${params.toString()}`);
+    setSearchText(searchText);
+    router.replace(`${pathname}/?${params.toString()}`);
+  };
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const text = e.currentTarget.value;
+    setSearchText(text);
+    debouncedCallback({ text });
   };
 
   return (
     <div className="space-y-4">
-      <form action={handleSubmit} className="relative">
+      <form className="relative">
         <Input
           type="text"
           name="searchText"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          value={searchText}
+          onChange={handleOnChange}
           placeholder="Search for your courses..."
-          className="pr-10 h-12"
+          className="pl-12 h-12"
         />
-
-        <Button
-          type="submit"
-          size="icon"
-          variant="ghost"
-          className="absolute right-0 top-0 h-12 w-12 text-muted-foreground"
-          aria-label="Search"
-        >
+        <div className="absolute left-0 top-0 h-12 w-12 flex justify-center items-center">
           <SearchIcon className="h-4 w-4" />
-        </Button>
+        </div>
       </form>
 
       <div className="flex flex-wrap gap-2 items-center">
