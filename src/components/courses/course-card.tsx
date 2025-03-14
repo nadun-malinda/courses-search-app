@@ -9,23 +9,12 @@ import { getFormattedDate } from "@/utils/date";
 
 interface CourseCardProps {
   course: Course;
-  variant?: "default" | "compact";
 }
 
-export function CourseCard({ course, variant = "default" }: CourseCardProps) {
+export function CourseCard({ course }: CourseCardProps) {
   return (
-    <Card
-      className={cn(
-        "overflow-hidden transition-all-300 hover:shadow-md group h-full",
-        "border border-border/40 bg-white"
-      )}
-    >
-      <CardContent
-        className={cn(
-          "p-4 sm:p-6 flex flex-col h-full",
-          variant === "compact" ? "sm:p-4" : ""
-        )}
-      >
+    <Card className="overflow-hidden transition-all-300 hover:shadow-md group h-full border border-border/40 bg-white p-0">
+      <CardContent className="p-6 flex flex-col h-full">
         <div className="flex justify-between items-start mb-2">
           <Badge
             variant="outline"
@@ -56,12 +45,7 @@ export function CourseCard({ course, variant = "default" }: CourseCardProps) {
           </Button>
         </div>
 
-        <h3
-          className={cn(
-            "font-medium text-lg mb-1 text-balance leading-tight",
-            variant === "compact" ? "text-base" : ""
-          )}
-        >
+        <h3 className="font-medium text-lg mb-1 text-balance leading-tight">
           {course.CourseName}
         </h3>
 
@@ -89,16 +73,10 @@ export function CourseCard({ course, variant = "default" }: CourseCardProps) {
         </div>
       </CardContent>
 
-      <CardFooter
-        className={cn(
-          "px-6 py-4 bg-secondary/30 border-t border-border/40",
-          variant === "compact" ? "px-4 py-3" : ""
-        )}
-      >
+      <CardFooter className="py-4 bg-secondary/30 border-t border-border/40">
         <div className="w-full flex flex-wrap gap-2 sm:flex-nowrap">
           <Button
             variant="outline"
-            size={variant === "compact" ? "sm" : "default"}
             className="w-full sm:w-auto bg-white hover:bg-secondary transition-all-200"
             asChild
           >
@@ -109,7 +87,6 @@ export function CourseCard({ course, variant = "default" }: CourseCardProps) {
           </Button>
           <Button
             variant="default"
-            size={variant === "compact" ? "sm" : "default"}
             className="w-full sm:w-auto transition-all-200"
             asChild
           >
