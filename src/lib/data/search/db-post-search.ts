@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/superbase/server";
 
-export async function postSearch(queryString: string) {
+export async function dbPostSearch(queryString: string) {
   const supabase = await createClient();
   const { error } = await supabase
     .from("saved_searches")

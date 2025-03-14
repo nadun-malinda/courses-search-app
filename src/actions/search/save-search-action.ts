@@ -1,7 +1,7 @@
 "use server";
 
-import { fetchExistingSearch } from "@/lib/data/search/fetch-existing-search";
-import { postSearch } from "@/lib/data/search/post-search";
+import { dbFetchExistingSearch } from "@/lib/data/search/db-fetch-existing-search";
+import { dbPostSearch } from "@/lib/data/search/db-post-search";
 import { normalizeQueryString } from "@/utils/url";
 
 /**
@@ -10,7 +10,7 @@ import { normalizeQueryString } from "@/utils/url";
  * @param {string} queryString - The raw query string to normalize and save.
  * @returns {Promise<{ success: boolean; message: string }>} - The result of the save operation.
  */
-export async function saveSearch(queryString: string): Promise<{
+export async function saveSearchAction(queryString: string): Promise<{
   success: boolean | null;
   message: string;
 }> {
@@ -18,13 +18,13 @@ export async function saveSearch(queryString: string): Promise<{
 
   try {
     // Check if the search query already exists
-    const existingSearch = await fetchExistingSearch(normalizedQueryString);
+    const existingSearch = await dbFetchExistingSearch(normalizedQueryString);
     if (Boolean(existingSearch)) {
       return { success: false, message: "Search already saved" };
     }
 
     // Insert the search query into the database
-    const insertSuccess = await postSearch(normalizedQueryString);
+    const insertSuccess = await dbPostSearch(normalizedQueryString);
     if (insertSuccess) {
       return { success: true, message: "Search saved successfully" };
     }

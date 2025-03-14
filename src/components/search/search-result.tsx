@@ -1,13 +1,13 @@
 import { CourseList } from "../courses/course-list";
 import { QueryParams } from "@/types/filters";
-import { fetchCourses } from "@/lib/data/course/fetch-courses";
+import { dbFetchCourses } from "@/lib/data/course/db-fetch-courses";
 
 export async function SearchResult({
   urlSearchParams,
 }: {
   urlSearchParams: QueryParams;
 }) {
-  const courses = await fetchCourses(urlSearchParams);
+  const courses = await dbFetchCourses(urlSearchParams);
 
   console.log(">>> courses: ", courses);
 

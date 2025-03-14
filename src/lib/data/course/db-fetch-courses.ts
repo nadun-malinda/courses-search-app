@@ -15,19 +15,20 @@ import { cache } from "react";
  * @returns {Promise<Array<CourseSchema>>} A promise resolving to an array of validated courses.
  * @throws {Error} If the fetched data is invalid or if Supabase query fails.
  */
-export const fetchCourses = cache(async (urlSearchParams: QueryParams) => {
+export const dbFetchCourses = cache(async (urlSearchParams: QueryParams) => {
   const { q, category, location } = urlSearchParams;
   const supabase = await createClient();
 
-  let query = supabase.from("courses").select("*");
+  let query = supabase.from("courses").select(`
+    *,
+    Favorites: favourite_courses (Id)
+  `);
 
   if (q) query = query.ilike("CourseName", `%${q}%`);
   if (category) query = query.in("Category", category.split(","));
   if (location) query = query.in("Location", location.split(","));
 
   const { data, error } = await query.limit(10);
-
-  console.log("FETCHING COURSES ...");
 
   if (error) {
     throw new Error(`Failed to fetch courses: ${error.message}`);
@@ -38,5 +39,8 @@ export const fetchCourses = cache(async (urlSearchParams: QueryParams) => {
     throw new Error("Invalid courses data");
   }
 
-  return parsed.data;
+  return parsed.data.map((course) => ({
+    ...course,
+    IsFavorite: course.Favorites.length > 0,
+  }));
 });

@@ -10,7 +10,7 @@ import { z } from "zod";
  * @returns {Promise<Array<SearchesSchema>>} A promise resolving to an array of validated saved searches.
  * @throws {Error} If the fetched data is invalid or if Supabase query fails.
  */
-export const fetchSavedSearches = cache(async () => {
+export const dbFetchSavedSearches = cache(async () => {
   const supabase = await createClient();
   const { data, error } = await supabase.from("saved_searches").select();
 

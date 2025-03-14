@@ -2,7 +2,7 @@ import { SearchesSchema } from "@/types/searches";
 import { createClient } from "@/utils/superbase/server";
 import { z } from "zod";
 
-export async function deleteSavedSearch(searchId: string) {
+export async function dbDeleteSavedSearch(searchId: string) {
   const supabase = await createClient();
 
   const { error, data } = await supabase

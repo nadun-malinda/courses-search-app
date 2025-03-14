@@ -2,13 +2,13 @@
 
 import { z } from "zod";
 import { revalidateTag } from "next/cache";
-import { deleteSavedSearch } from "@/lib/data/search/delete-saved-search";
+import { dbDeleteSavedSearch } from "@/lib/data/search/db-delete-saved-search";
 
 const SearchIdSchema = z
   .string()
   .min(1, "Search ID must be a non-empty string.");
 
-export async function deleteSearch(
+export async function deleteSearchAction(
   searchId: string
 ): Promise<{ success: boolean | null; message: string }> {
   try {
@@ -18,10 +18,10 @@ export async function deleteSearch(
   }
 
   try {
-    await deleteSavedSearch(searchId);
+    await dbDeleteSavedSearch(searchId);
 
     // revalidatePath("/");
-    revalidateTag("saved_searches_tag");
+    revalidateTag("");
     return { success: true, message: "Saved search deleted successfully." };
   } catch (error) {
     console.error("Failed to delete saved search: ", error);

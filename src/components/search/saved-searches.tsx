@@ -10,7 +10,7 @@ import { formatDistance } from "date-fns";
 import { Badge } from "../ui/badge";
 import { getQueryParams } from "@/utils/url";
 import { DeleteSavedSearch } from "./delete-saved-search";
-import { fetchSavedSearches } from "@/lib/data/search/fetch-saved-searches";
+import { dbFetchSavedSearches } from "@/lib/data/search/db-fetch-saved-searches";
 import { ApplySavedSearch } from "./apply-saved-search";
 import { EmptyResult } from "../empty/empty-result";
 
@@ -19,7 +19,7 @@ import { EmptyResult } from "../empty/empty-result";
  * @returns JSX element to render saved searches.
  */
 export async function SavedSearches() {
-  const savedSearches = await fetchSavedSearches();
+  const savedSearches = await dbFetchSavedSearches();
 
   console.log(">>> savesSearches: ", savedSearches);
 

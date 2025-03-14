@@ -9,12 +9,13 @@ export const CourseSchema = z.object({
   Location: z.string(),
   Language: z.string().optional(),
   StartDate: z.string(),
+  Favorites: z.array(z.object({ Id: z.string() }).optional()),
   IsFavorite: z.boolean().optional(),
 });
 
 export const FavouriteCourseSchema = z.object({
   Id: z.string(),
-  UserId: z.string().optional(),
+  UserId: z.string().optional().nullable(),
   CourseId: z.string(),
   CreatedAt: z.string(),
 });

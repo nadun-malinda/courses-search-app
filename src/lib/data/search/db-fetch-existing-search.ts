@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/superbase/server";
 
-export async function fetchExistingSearch(queryString: string) {
+export async function dbFetchExistingSearch(queryString: string) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("saved_searches")

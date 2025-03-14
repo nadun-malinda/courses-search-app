@@ -1,11 +1,11 @@
-import { cn } from "@/lib/utils";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
-import { BookOpen, Calendar, Heart, MapPin } from "lucide-react";
+import { BookOpen, Calendar, MapPin } from "lucide-react";
 import Link from "next/link";
 import { Course } from "@/types/courses";
 import { getFormattedDate } from "@/utils/date";
+import { ToggleFavouriteCourse } from "./toggle-favourite-course";
 
 interface CourseCardProps {
   course: Course;
@@ -22,27 +22,7 @@ export function CourseCard({ course }: CourseCardProps) {
           >
             {course.Category}
           </Badge>
-          <Button
-            variant="ghost"
-            size="icon"
-            className={cn(
-              "h-8 w-8 rounded-full transition-all-200",
-              course.IsFavorite
-                ? "text-red-500 hover:text-red-600 hover:bg-red-50"
-                : "text-muted-foreground hover:text-red-500 hover:bg-red-50"
-            )}
-            // onClick={handleFavoriteToggle}
-            aria-label={
-              course.IsFavorite ? "Remove from favorites" : "Add to favorites"
-            }
-          >
-            <Heart
-              className={cn(
-                "h-4 w-4 transition-all-200",
-                course.IsFavorite ? "fill-current" : ""
-              )}
-            />
-          </Button>
+          <ToggleFavouriteCourse course={course} />
         </div>
 
         <h3 className="font-medium text-lg mb-1 text-balance leading-tight">

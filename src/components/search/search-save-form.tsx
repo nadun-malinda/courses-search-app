@@ -5,12 +5,12 @@ import { toast } from "sonner";
 import { LoaderCircle, Save } from "lucide-react";
 import { Button } from "../ui/button";
 import { useSearchParams } from "next/navigation";
-import { saveSearch } from "@/actions/search/save-search";
+import { saveSearchAction } from "@/actions/search/save-search-action";
 
 export function SearchSaveForm() {
   const searchParams = useSearchParams();
-  const saveSearchAction = saveSearch.bind(null, searchParams.toString());
-  const [state, formAction, isPending] = useActionState(saveSearchAction, {
+  const action = saveSearchAction.bind(null, searchParams.toString());
+  const [state, formAction, isPending] = useActionState(action, {
     success: null,
     message: "",
   });

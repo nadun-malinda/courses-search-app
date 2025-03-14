@@ -3,12 +3,12 @@
 import { LoaderCircle, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { useActionState, useEffect } from "react";
-import { deleteSearch } from "@/actions/search/delete-search";
+import { deleteSearchAction } from "@/actions/search/delete-search-action";
 import { toast } from "sonner";
 
 export function DeleteSavedSearch({ searchId }: { searchId: string }) {
-  const deleteSearchAction = deleteSearch.bind(null, searchId);
-  const [state, formAction, isPending] = useActionState(deleteSearchAction, {
+  const action = deleteSearchAction.bind(null, searchId);
+  const [state, formAction, isPending] = useActionState(action, {
     success: null,
     message: "",
   });
