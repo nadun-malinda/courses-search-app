@@ -3,18 +3,15 @@
 import { LoaderCircle, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { useActionState, useEffect } from "react";
-import { deleteSavedSearch } from "@/actions/delete-saved-search";
+import { deleteSearch } from "@/actions/search/delete-search";
 import { toast } from "sonner";
 
 export function DeleteSavedSearch({ searchId }: { searchId: string }) {
-  const deleteSavedSearchAction = deleteSavedSearch.bind(null, searchId);
-  const [state, formAction, isPending] = useActionState(
-    deleteSavedSearchAction,
-    {
-      success: null,
-      message: "",
-    }
-  );
+  const deleteSearchAction = deleteSearch.bind(null, searchId);
+  const [state, formAction, isPending] = useActionState(deleteSearchAction, {
+    success: null,
+    message: "",
+  });
 
   useEffect(() => {
     // prevent showing the toast in the initial render.

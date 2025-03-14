@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { LoaderCircle, Save } from "lucide-react";
 import { Button } from "../ui/button";
 import { useSearchParams } from "next/navigation";
-import { saveSearch } from "@/actions/save-search";
+import { saveSearch } from "@/actions/search/save-search";
 
 export function SearchSaveForm() {
   const searchParams = useSearchParams();
