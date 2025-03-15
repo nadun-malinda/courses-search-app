@@ -5,7 +5,10 @@ import { z } from "zod";
 
 export const dbFetchFavouriteCourses = cache(async () => {
   const supabase = await createClient();
-  const { data, error } = await supabase.from("favourite_courses").select();
+  const { data, error } = await supabase.from("favourite_courses").select(
+    `*, 
+      CoursesTable: courses (CourseName, InstituteName, Category, DeliveryMethod, Location, Language, StartDate, Favorites: favourite_courses (Id))`
+  );
 
   if (error) {
     throw new Error(`Failed to fetch favourite courses: ${error.message}`);
@@ -16,5 +19,11 @@ export const dbFetchFavouriteCourses = cache(async () => {
     throw new Error("Invalid favourite courses data");
   }
 
-  return parsed.data;
+  return parsed.data.map((favCourses) => ({
+    ...favCourses,
+    ...favCourses.CoursesTable,
+    IsFavorite: favCourses.CoursesTable
+      ? favCourses.CoursesTable.Favorites.length > 0
+      : false,
+  }));
 });

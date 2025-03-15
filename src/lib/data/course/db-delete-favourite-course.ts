@@ -9,8 +9,8 @@ export async function dbDeleteFavouriteCourse(courseId: string) {
   const { error, data } = await supabase
     .from("favourite_courses")
     .delete()
-    .eq("CourseId", courseId)
-    .select();
+    .eq("CourseId", courseId).select(`*, 
+      CoursesTable: courses (CourseName, InstituteName, Category, DeliveryMethod, Location, Language, StartDate, Favorites: favourite_courses (Id))`);
 
   if (error) {
     throw new Error(`Failed to remove favourite course: ${error.message}`);

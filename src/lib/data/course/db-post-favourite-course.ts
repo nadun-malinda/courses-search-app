@@ -7,8 +7,8 @@ export async function dbPostFavouriteCourse(courseId: string) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("favourite_courses")
-    .insert([{ CourseId: courseId }])
-    .select();
+    .insert([{ CourseId: courseId }]).select(`*, 
+      CoursesTable: courses (CourseName, InstituteName, Category, DeliveryMethod, Location, Language, StartDate, Favorites: favourite_courses (Id))`);
 
   if (error) {
     throw new Error(error.message); // If there's an error during insert

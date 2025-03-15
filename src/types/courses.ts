@@ -18,6 +18,16 @@ export const FavouriteCourseSchema = z.object({
   UserId: z.string().optional().nullable(),
   CourseId: z.string(),
   CreatedAt: z.string(),
+  CoursesTable: CourseSchema.pick({
+    Category: true,
+    CourseName: true,
+    DeliveryMethod: true,
+    InstituteName: true,
+    Language: true,
+    Location: true,
+    StartDate: true,
+    Favorites: true,
+  }),
 });
 
 export type Course = z.infer<typeof CourseSchema>;

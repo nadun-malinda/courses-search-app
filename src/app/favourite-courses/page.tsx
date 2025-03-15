@@ -1,5 +1,5 @@
-import { EmptyResult } from "@/components/empty/empty-result";
 import { Heart } from "lucide-react";
+import { FavouriteCourses } from "@/components/courses/favourite-courses";
 
 export default function FavouriteCoursesPage() {
   return (
@@ -14,10 +14,7 @@ export default function FavouriteCoursesPage() {
         </p>
       </div>
 
-      <EmptyResult
-        title="No favourite courses yet."
-        message="Save your coureses for quick access later."
-      />
+      <FavouriteCourses />
     </div>
   );
 }

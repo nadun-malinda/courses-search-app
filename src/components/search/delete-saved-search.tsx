@@ -18,7 +18,7 @@ export function DeleteSavedSearch({ searchId }: { searchId: string }) {
     if (state.success !== null) {
       toast(state.message);
     }
-  }, [state]);
+  }, [state.success, state.message]);
 
   return (
     <form action={formAction}>

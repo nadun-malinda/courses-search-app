@@ -60,7 +60,7 @@ export function CourseCard({ course }: CourseCardProps) {
             className="w-full sm:w-auto transition-all-200"
             asChild
           >
-            <Link href={`/apply/${course.CourseId}`}>Apply Now</Link>
+            <Link href="/">Apply Now</Link>
           </Button>
         </div>
       </CardFooter>
