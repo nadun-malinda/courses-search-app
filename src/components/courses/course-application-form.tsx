@@ -58,10 +58,12 @@ export function CourseApplicationForm({ course }: { course: Course }) {
         ...values,
         courseId: course.CourseId,
       });
-      toast(message);
 
       if (success) {
+        toast.success(message);
         form.reset();
+      } else {
+        toast.error(message);
       }
     });
   };

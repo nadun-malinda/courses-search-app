@@ -39,7 +39,7 @@ export default function RootLayout({
         >
           {children}
         </main>
-        <Toaster />
+        <Toaster richColors duration={6000} closeButton theme="light" />
       </body>
     </html>
   );

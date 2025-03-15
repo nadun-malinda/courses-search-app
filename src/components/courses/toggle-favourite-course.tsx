@@ -30,12 +30,16 @@ export function ToggleFavouriteCourse({ course }: { course: Course }) {
     setIsFavorite(newIsfavourite);
     setOptimisticCourse(newIsfavourite);
 
-    const { message } = await toggleFavouriteCourseAction({
+    const { message, success } = await toggleFavouriteCourseAction({
       isFavorite: newIsfavourite,
       courseId: course.CourseId,
     });
 
-    toast(message);
+    if (success) {
+      toast.success(message);
+    } else {
+      toast.error(message);
+    }
   };
 
   return (
