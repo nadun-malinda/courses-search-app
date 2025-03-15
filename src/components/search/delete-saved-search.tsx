@@ -16,7 +16,11 @@ export function DeleteSavedSearch({ searchId }: { searchId: string }) {
   useEffect(() => {
     // prevent showing the toast in the initial render.
     if (state.success !== null) {
-      toast(state.message);
+      if (state.success) {
+        toast.success(state.message);
+      } else {
+        toast.error(state.message);
+      }
     }
   }, [state.success, state.message]);
 
