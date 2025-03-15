@@ -13,8 +13,8 @@ export async function deleteFavouriteCourseAction(
   try {
     await dbDeleteFavouriteCourse(courseId);
 
-    // revalidate "courses" cache and refetch
-    revalidateTag("courses");
+    revalidateTag("courses"); // revalidate "courses" cache and refetch
+    revalidateTag("favourite_courses"); // revalidate "favourite_courses" cache and refetch
     return {
       success: true,
       message: "Course removed from favorites successfully.",

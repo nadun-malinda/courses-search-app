@@ -13,8 +13,8 @@ export async function saveFavouriteCourseAction(
   try {
     await dbPostFavouriteCourse(courseId);
 
-    // revalidate "courses" cache and refetch
-    revalidateTag("courses");
+    revalidateTag("courses"); // revalidate "courses" cache and refetch
+    revalidateTag("favourite_courses"); // revalidate "favourite_courses" cache and refetch
     return {
       success: true,
       message: "Course added to favorites successfully.",
