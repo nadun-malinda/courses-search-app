@@ -31,7 +31,7 @@ export async function SavedSearches() {
           message="Save your search parameters for quick access later."
         />
       ) : (
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
           {savedSearches?.map((search) => (
             <Card
               key={search.Id}
