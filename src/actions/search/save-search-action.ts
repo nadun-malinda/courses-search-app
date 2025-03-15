@@ -3,6 +3,7 @@
 import { dbFetchExistingSearch } from "@/lib/data/search/db-fetch-existing-search";
 import { dbPostSearch } from "@/lib/data/search/db-post-search";
 import { normalizeQueryString } from "@/utils/url";
+import { revalidateTag } from "next/cache";
 
 /**
  * Saves a search query to the database if it doesn't already exist.
@@ -26,6 +27,9 @@ export async function saveSearchAction(queryString: string): Promise<{
     // Insert the search query into the database
     const insertSuccess = await dbPostSearch(normalizedQueryString);
     if (insertSuccess) {
+      // revalidate "saved_searches" cache and refetch
+      revalidateTag("saved_searches");
+
       return { success: true, message: "Search saved successfully" };
     }
 

@@ -1,8 +1,8 @@
 "use server";
 
 import { z } from "zod";
-import { revalidateTag } from "next/cache";
 import { dbDeleteSavedSearch } from "@/lib/data/search/db-delete-saved-search";
+import { revalidateTag } from "next/cache";
 
 const SearchIdSchema = z
   .string()
@@ -20,8 +20,8 @@ export async function deleteSearchAction(
   try {
     await dbDeleteSavedSearch(searchId);
 
-    // revalidatePath("/");
-    revalidateTag("");
+    // revalidate "saved_searches" cache and refetch
+    revalidateTag("saved_searches");
     return { success: true, message: "Saved search deleted successfully." };
   } catch (error) {
     console.error("Failed to delete saved search: ", error);
