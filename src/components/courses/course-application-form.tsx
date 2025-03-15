@@ -69,7 +69,7 @@ export function CourseApplicationForm({ course }: { course: Course }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Apply course</Button>
+        <Button variant="default">Apply course</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
