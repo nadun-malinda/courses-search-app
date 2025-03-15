@@ -19,6 +19,6 @@ export async function dbPostFavouriteCourse(courseId: string) {
     throw new Error("Invalid favourite courses data");
   }
 
-  revalidateTag("");
+  revalidateTag("courses");
   return parsed.data;
 }
