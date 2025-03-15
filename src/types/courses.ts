@@ -40,10 +40,21 @@ export const FavouriteCourseSchema = z.object({
  * Schema for the course application database values.
  */
 export const CourseApplicationSchema = z.object({
+  Id: z.string(),
   FirstName: z.string(),
   LastName: z.string().optional(),
   Email: z.string().email(),
   CourseId: z.string(),
+  CreatedAt: z.string(),
+  CoursesTable: CourseSchema.pick({
+    Category: true,
+    CourseName: true,
+    DeliveryMethod: true,
+    InstituteName: true,
+    Language: true,
+    Location: true,
+    StartDate: true,
+  }).optional(),
 });
 
 /**
