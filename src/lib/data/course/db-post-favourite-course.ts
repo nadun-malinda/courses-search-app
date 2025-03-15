@@ -1,6 +1,5 @@
 import { FavouriteCourseSchema } from "@/types/courses";
 import { createClient } from "@/utils/superbase/server";
-import { revalidateTag } from "next/cache";
 import { z } from "zod";
 
 export async function dbPostFavouriteCourse(courseId: string) {
@@ -19,6 +18,5 @@ export async function dbPostFavouriteCourse(courseId: string) {
     throw new Error("Invalid favourite courses data");
   }
 
-  revalidateTag("courses");
   return parsed.data;
 }

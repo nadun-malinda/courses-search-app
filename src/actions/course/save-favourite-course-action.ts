@@ -1,4 +1,5 @@
 import { dbPostFavouriteCourse } from "@/lib/data/course/db-post-favourite-course";
+import { revalidateTag } from "next/cache";
 
 /**
  * Adds a course to the user's favorite list.
@@ -11,6 +12,9 @@ export async function saveFavouriteCourseAction(
 ): Promise<{ success: boolean | null; message: string }> {
   try {
     await dbPostFavouriteCourse(courseId);
+
+    // revalidate "courses" cache and refetch
+    revalidateTag("courses");
     return {
       success: true,
       message: "Course added to favorites successfully.",

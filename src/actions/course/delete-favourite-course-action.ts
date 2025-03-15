@@ -1,4 +1,5 @@
 import { dbDeleteFavouriteCourse } from "@/lib/data/course/db-delete-favourite-course";
+import { revalidateTag } from "next/cache";
 
 /**
  * Removes a course from the user's favorite list.
@@ -11,6 +12,9 @@ export async function deleteFavouriteCourseAction(
 ): Promise<{ success: boolean | null; message: string }> {
   try {
     await dbDeleteFavouriteCourse(courseId);
+
+    // revalidate "courses" cache and refetch
+    revalidateTag("courses");
     return {
       success: true,
       message: "Course removed from favorites successfully.",
