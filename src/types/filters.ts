@@ -7,6 +7,7 @@ export const QueryParamsSchema = z.object({
   q: z.string().optional(),
   category: z.string().optional(),
   location: z.string().optional(),
+  page: z.string().optional(),
 });
 
 /**
