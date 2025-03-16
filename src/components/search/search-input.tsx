@@ -7,6 +7,11 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { SearchSaveForm } from "./search-save-form";
 import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 
+/**
+ * SearchInput Component
+ *
+ * Renders a search input field with debounced search functionality.
+ */
 export function SearchInput() {
   const router = useRouter();
   const pathname = usePathname();
@@ -17,19 +22,33 @@ export function SearchInput() {
     300
   );
 
+  /**
+   * Sets the search query parameter and updates the URL.
+   *
+   * @param {Object} params - The search parameters.
+   * @param {string} params.text - The search text.
+   */
   const setSearch = ({ text }: { text: string }) => {
     const params = new URLSearchParams(searchParams);
 
     if (text) {
-      params.set("q", searchText);
+      params.set("q", text);
     } else {
       params.delete("q");
     }
 
-    setSearchText(searchText);
+    // Set page to 0 with every new search
+    params.set("page", "0");
+
+    setSearchText(text);
     router.replace(`${pathname}/?${params.toString()}`);
   };
 
+  /**
+   * Handles the change event for the search input field.
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} e - The change event.
+   */
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const text = e.currentTarget.value;
     setSearchText(text);
