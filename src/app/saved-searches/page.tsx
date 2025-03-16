@@ -1,6 +1,5 @@
 import { SavedSearches } from "@/components/search/saved-searches";
 import { Bookmark } from "lucide-react";
-import { Suspense } from "react";
 
 export default function SavedSearchesPage() {
   return (
@@ -14,9 +13,7 @@ export default function SavedSearchesPage() {
           Searches you have saved for quick access
         </p>
       </div>
-      <Suspense fallback={<>Loading ...</>}>
-        <SavedSearches />
-      </Suspense>
+      <SavedSearches />
     </div>
   );
 }
