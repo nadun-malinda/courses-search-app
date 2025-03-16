@@ -1,3 +1,4 @@
+import { CardSkeleton } from "@/components/loading/card-skeleton";
 import { SearchInput } from "@/components/search/search-input";
 import { SearchResult } from "@/components/search/search-result";
 import { type QueryParams } from "@/types/filters";
@@ -25,7 +26,7 @@ export default async function Home({
 
           <Suspense
             key={`${urlSearchParams.q}${urlSearchParams.page}`}
-            fallback={<>Loading ...</>}
+            fallback={<CardSkeleton />}
           >
             <SearchResult urlSearchParams={urlSearchParams} />
           </Suspense>
