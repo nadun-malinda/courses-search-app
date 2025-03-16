@@ -12,7 +12,7 @@ export default async function Home({
 
   return (
     <div className="container mx-auto transition-all animate-fade-in">
-      <div className="space-y-6 pb-8 page-transition">
+      <div className="space-y-6 pb-8">
         <div className="space-y-1">
           <h1 className="text-3xl font-bold">Search Courses</h1>
           <p className="text-muted-foreground">

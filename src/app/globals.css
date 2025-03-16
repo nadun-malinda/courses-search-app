@@ -128,9 +128,6 @@
 }
 
 @layer base {
-  .page-transition {
-    @apply animate-fade-in;
-  }
   * {
     @apply border-border outline-ring/50;
   }

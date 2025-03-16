@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
 import { Navigation } from "@/components/navbar/navigation";
 
@@ -28,15 +27,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-accent`}
       >
         <Navigation />
-        <main
-          className={cn(
-            "flex-1 container mx-auto py-6 px-4 sm:px-6 transition-all",
-            "animate-fade-in"
-          )}
-        >
+        <main className="flex-1 container mx-auto py-6 px-4 sm:px-6 transition-all animate-fade-in">
           {children}
         </main>
         <Toaster richColors duration={6000} closeButton theme="light" />

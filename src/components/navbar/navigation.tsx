@@ -65,7 +65,7 @@ export function Navigation() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   return (
-    <div>
+    <div className="border-b bg-background">
       <div className="container mx-auto transition-all p-4">
         <div className="flex justify-between items-center md:hidden">
           <Button variant="ghost" onClick={() => setIsSheetOpen(true)}>
