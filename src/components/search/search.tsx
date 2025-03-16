@@ -16,7 +16,10 @@ export function Search({ urlSearchParams }: { urlSearchParams: QueryParams }) {
       <div className="lg:col-span-2 space-y-6">
         <SearchInput />
 
-        <Suspense fallback={<>Loading ...</>}>
+        <Suspense
+          key={`${urlSearchParams.q}${urlSearchParams.page}`}
+          fallback={<>Loading ...</>}
+        >
           <SearchResult urlSearchParams={urlSearchParams} />
         </Suspense>
       </div>
