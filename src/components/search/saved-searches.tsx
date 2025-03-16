@@ -21,8 +21,6 @@ import { EmptyResult } from "../empty/empty-result";
 export async function SavedSearches() {
   const savedSearches = await dbFetchSavedSearches();
 
-  console.log(">>> savesSearches: ", savedSearches);
-
   return (
     <>
       {savedSearches.length === 0 ? (

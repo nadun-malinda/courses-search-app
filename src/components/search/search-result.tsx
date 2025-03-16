@@ -17,8 +17,6 @@ export async function SearchResult({
     limit
   );
 
-  console.log(">>> courses: ", courses);
-
   return (
     <div className="space-y-4">
       <h2 className="text-xl font-semibold flex items-center">
