@@ -19,9 +19,9 @@ export async function SearchResult({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-semibold flex items-center">
+      <h2 className="text-xl font-semibold flex md:items-center flex-col md:flex-row items-start">
         Search Results
-        <span className="ml-2 text-sm font-normal text-muted-foreground">
+        <span className="md:ml-2 text-sm font-normal text-muted-foreground">
           (Showing {courses.length} out of {totalCount} results)
         </span>
       </h2>
