@@ -7,10 +7,11 @@ https://keystone-courses-search-app.vercel.app/
 ## Technology used
 
 - TypeScript
-- NextJS (app routers)
+- NextJS (app router)
 - Supabase
 - TailwindCSS
 - ShadCN
+- zod
 - Jest
 
 ## Project structure
@@ -107,3 +108,15 @@ Then, the easy part, run the development server:
   ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Run unit tests
+
+```bash
+npm run test
+```
+
+or `watch` mode
+
+```bash
+npm run test:watch
+```
