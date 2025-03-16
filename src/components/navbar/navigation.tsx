@@ -6,19 +6,23 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from "../ui/navigation-menu";
-import { FileText, Heart, Home, Save } from "lucide-react";
+} from "@/components/ui/navigation-menu";
+import { FileText, Heart, Home, Save, Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { useState } from "react";
 
 /**
- * Navigation Component
+ * MenuItems Component
  *
- * Renders the navigation menu with links to different pages.
+ * Renders the list of navigation menu items.
  *
- * @returns {JSX.Element} The rendered Navigation component.
+ * @param {Object} props - The component props.
+ * @param {Function} props.onClick - The click handler for menu items.
+ * @returns {JSX.Element} The rendered MenuItems component.
  */
-export function Navigation() {
+function MenuItems({ onClick }: { onClick?: () => void }) {
   const pathname = usePathname();
 
   const menuItems = [
@@ -29,27 +33,57 @@ export function Navigation() {
   ];
 
   return (
+    <NavigationMenuList className="flex flex-col md:flex-row gap-4 items-start">
+      {menuItems.map((item) => (
+        <NavigationMenuItem
+          key={item.href}
+          onClick={onClick}
+          className={pathname === item.href ? "bg-accent rounded-sm" : ""}
+        >
+          <Button asChild>
+            <Link href={item.href} legacyBehavior passHref>
+              <NavigationMenuLink className="flex flex-row items-center gap-2">
+                <item.icon className="w-4 h-4" />
+                {item.label}
+              </NavigationMenuLink>
+            </Link>
+          </Button>
+        </NavigationMenuItem>
+      ))}
+    </NavigationMenuList>
+  );
+}
+
+/**
+ * Navigation Component
+ *
+ * Renders the navigation menu with links to different pages.
+ *
+ * @returns {JSX.Element} The rendered Navigation component.
+ */
+export function Navigation() {
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  return (
     <div>
       <div className="container mx-auto transition-all p-4">
-        <NavigationMenu>
-          <NavigationMenuList>
-            {menuItems.map((item) => (
-              <NavigationMenuItem key={item.href}>
-                <Button
-                  asChild
-                  variant={pathname === item.href ? "default" : "ghost"}
-                >
-                  <Link href={item.href} legacyBehavior passHref>
-                    <NavigationMenuLink className="flex flex-row items-center gap-2">
-                      <item.icon className="w-4 h-4" />
-                      {item.label}
-                    </NavigationMenuLink>
-                  </Link>
-                </Button>
-              </NavigationMenuItem>
-            ))}
-          </NavigationMenuList>
-        </NavigationMenu>
+        <div className="flex justify-between items-center md:hidden">
+          <Button variant="ghost" onClick={() => setIsSheetOpen(true)}>
+            <Menu className="w-6 h-6" />
+          </Button>
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+            <SheetContent side="left">
+              <NavigationMenu>
+                <MenuItems onClick={() => setIsSheetOpen(false)} />
+              </NavigationMenu>
+            </SheetContent>
+          </Sheet>
+        </div>
+        <div className="hidden md:block">
+          <NavigationMenu>
+            <MenuItems />
+          </NavigationMenu>
+        </div>
       </div>
     </div>
   );
