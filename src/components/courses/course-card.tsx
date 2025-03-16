@@ -24,7 +24,7 @@ export function CourseCard({ course }: CourseCardProps) {
           <ToggleFavouriteCourse course={course} />
         </div>
 
-        <h3 className="font-medium text-lg mb-1 text-balance leading-tight">
+        <h3 className="font-medium text-lg mb-1 text-balance leading-tight break-words">
           {course.CourseName}
         </h3>
 
