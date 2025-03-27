@@ -2,7 +2,15 @@
 
 ## Live preview
 
-https://keystone-courses-search-app.vercel.app/
+[https://courses-search-app.vercel.app/](https://courses-search-app.vercel.app/)
+
+## Description
+This is a simple app to search for courses available in a database (Supabase). By using this app, users can:-
+- Search for a specific course by its name
+- Save a specific search for later usage
+- Paginate through long list of courses
+- Mark and unmark a course as a favourite course, and list all the favourite courses
+- Apply for a course and see all the previously submitted course applications
 
 ## Technology used
 
