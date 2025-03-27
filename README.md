@@ -25,7 +25,7 @@ This is a simple app to search for courses available in a database (Supabase). B
 ## Project structure
 
 ```bash
-Keystone Courses Search Project
+Courses Search Project
 
 ├── src/                   # Main source code
 │   ├── actions/           # Server actions
