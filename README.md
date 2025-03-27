@@ -1,4 +1,4 @@
-# keystone-courses-search-app
+# courses-search-app
 
 ## Live preview
 
